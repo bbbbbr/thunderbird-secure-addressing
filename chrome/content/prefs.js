@@ -28,6 +28,7 @@ var EXPORTED_SYMBOLS = ["SaGetPref", "SaGetPrefAry", "SaSetPref", "SaSetPrefAry"
                         "SaSetPrefInt", "SaGetPrefInt"];
 
 Components.utils.import("chrome://secure-addressing/content/log.js");
+Components.utils.import("resource://gre/modules/Services.jsm");
 
 /*
 try {
@@ -39,7 +40,7 @@ try {
 }
 */
 
-/* 
+/*
 Thanks to sayamda@qiita for uploading a nice substitution of nsPreferences!
 http://qiita.com/sayamada/items/d6d26a3c2e9613854019
 */
@@ -54,8 +55,12 @@ var customPrefs = {
         }
         var val = undefined;
         try{
-            val = this.orgPrefs.getComplexValue(key, Components.interfaces.nsISupportsString).data;
-        }catch(e){  
+            if ( Services.vc.compare(Services.appinfo.platformVersion, '58') < 0 ) {
+              val = this.orgPrefs.getComplexValue(key, Components.interfaces.nsISupportsString).data;
+            } else {
+              val = this.orgPrefs.getStringPref(key);
+            }
+        }catch(e){
             //err("Reading " + key + " " + e);
         }
         if(val !== undefined && val !== ""){
