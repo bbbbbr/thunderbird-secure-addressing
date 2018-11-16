@@ -73,7 +73,12 @@ var customPrefs = {
         var str = Components.classes["@mozilla.org/supports-string;1"]
                     .createInstance(Components.interfaces.nsISupportsString);
         str.data = val;
-        this.orgPrefs.setComplexValue(key, Components.interfaces.nsISupportsString, str);
+
+        if ( Services.vc.compare(Services.appinfo.platformVersion, '58') < 0 ) {
+            this.orgPrefs.setComplexValue(key, Components.interfaces.nsISupportsString, str);
+        } else {
+            this.orgPrefs.setStringPref(key, str);
+        }
     },
     getBoolPref: function(key, defaultVal){
         try{
