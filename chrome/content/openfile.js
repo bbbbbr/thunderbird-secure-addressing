@@ -89,6 +89,7 @@ function openAll() {
                                                                      Services.scriptSecurityManager.getSystemPrincipal(),
                                                                      null,      // aTriggeringPrincipal
                                                                      Ci.nsILoadInfo.SEC_NORMAL,
+                               -                                     Ci.nsIContentPolicy.TYPE_OTHER);
                     } // if (Tbird > v58) -> else
 
                     if (channel) {
