@@ -32,6 +32,34 @@ var abManager = Components.classes["@mozilla.org/abmanager;1"]
         .getService(Components.interfaces.nsIAbManager);
 
 
+// Updates the "N of N Recipients checked" label
+// Called from: check_all_done()
+function updateRecipCount() {
+    let recip_count_el = document.getElementById("recipcount");
+
+    // Get total number of recipient checkboxes and then count number checked
+    let list = document.getElementById("addrlist");
+    let checkboxes = list.getElementsByTagName("checkbox");
+
+    let recip_count_total = checkboxes.length;
+    let recip_count_checked = 0;
+
+    for(let i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].getAttribute("checked") == "true")
+            recip_count_checked++;
+    }
+
+    // Updatae display label
+    let stringsBundle = document.getElementById("secure-addressing-sb-caw");
+
+    if (recip_count_total == 0) {
+        recip_count_el.setAttribute("value", stringsBundle.getString('recip_count_none_String'));
+    } else {
+        recip_count_el.setAttribute("value", stringsBundle.getFormattedString('recip_count_String', [recip_count_checked, recip_count_total]));
+    }
+}
+
+
 function getLastSent(email) {
     let collect = SaGetPrefBool("collect_address");
     if (!collect) {
@@ -89,6 +117,8 @@ function check_all_done() {
     //if (acheck.getAttribute("checked") == "false") {
         complete = false;
     }
+
+    updateRecipCount();
 
     if (complete) {
         document.documentElement.getButton("accept").disabled = false;
@@ -200,7 +230,7 @@ function add(data) {
     row.appendChild(cell);
 
     list.appendChild(row);
-    
+
     //row.checkbox.setAttribute("checked", defchekced);
 }
 
@@ -209,7 +239,7 @@ function startup() {
     /* tweak to supress odd stretch of listbox */
     document.getElementById("addrlist").removeItemAt(0);
     document.documentElement.getButton("accept").disabled = true;
-    
+
     let cols =  ["colemail", "colname", "collast"];
     for(let i = 0; i < cols.length; i++) {
         let w = SaGetPrefInt("ca_width_" + cols[i]);
@@ -220,7 +250,7 @@ function startup() {
         col.setAttribute("flex", 0);
         col.setAttribute("width", w)
     }
-    
+
     let list = window.arguments[1];
     for (let i = 0; i < list.length; i++) {
         try{
@@ -228,7 +258,7 @@ function startup() {
         } catch(e) {
             err("confirm win: error in adding items " + e);
         }
-    } 
+    }
     let bucket = window.arguments[2];
     let nattach = bucket.getRowCount();
     let acheck = document.getElementById("acheck");

@@ -6,18 +6,18 @@
 <dialog id="confirmaddress" title="Check Addresses"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         buttons="accept,cancel" width="600"
-	onload="startup();" 
+	onload="startup();"
 	ondialogaccept="return onOK();"
         ondialogcancel="return onCancel();">
 
   <stringbundleset id="stringbundleset">
-    <stringbundle id="secure-addressing-sb-caw" 
+    <stringbundle id="secure-addressing-sb-caw"
                   src="chrome://secure-addressing/locale/confirm-address-win.properties"/>
   </stringbundleset>
 
   <script type="application/x-javascript" src="chrome://secure-addressing/content/confirm-address-win.js"/>
   <script type="application/x-javascript" src="chrome://secure-addressing/content/openfile.js"/>
-  
+
   <listbox id="addrlist" rows="6">
     <listhead>
       <listheader label="" />
@@ -26,7 +26,7 @@
       <listheader label="&header_name;" />
       <listheader label="&header_lastsent;" />
     </listhead>
-                                        
+
     <listcols>
       <listcol width="30"/>
       <listcol width="40"/>
@@ -48,6 +48,8 @@
   <hbox>
       <checkbox id="acheck" oncommand="check_all_done();"/>
       <button id="openall" oncommand="openAll();" label="&open_all;"/>
+      <spacer flex="1"></spacer>
+      <label id="recipcount" value="N of N Recipients" style="text-align: right; padding-top:5px;"/>
   </hbox>
 
 </dialog>
