@@ -2,8 +2,8 @@
 <RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:em="http://www.mozilla.org/2004/em-rdf#">
 	<Description about="urn:mozilla:install-manifest">
-		<em:id>secure-addressing@matsuba.net</em:id>
-		<em:version>1.81</em:version>
+		<em:id>secure-addressing@bbbbbr.github.com</em:id>
+		<em:version>1.82</em:version>
 		<em:targetApplication>
 			<Description>
 			<em:id>{3550f703-e582-4d05-9a08-453d09bdfdc6}</em:id>
@@ -11,10 +11,10 @@
 			<em:maxVersion>60.*</em:maxVersion>
 			</Description>
 		</em:targetApplication>
-		<em:name>Secure Addressing</em:name>
+		<em:name>Secure Addressing 60</em:name>
 		<em:description>Provide a set of features to reduce misaddressing</em:description>
 		<em:optionsURL>chrome://secure-addressing/content/main-settings.xul</em:optionsURL>
-		<em:creator>Hiroya Matsuba</em:creator>
+		<em:creator>Hiroya Matsuba + patches</em:creator>
 		<em:type>2</em:type>
 	</Description>
 </RDF>
