@@ -216,6 +216,7 @@ function add(data) {
             if (diff > 30 * oneday) {
                 cell.setAttribute('label', s);
                 cell.setAttribute('style', 'color: red;');
+                checkbox.setAttribute("checked", false);
             } else {
                 cell.setAttribute('label', s);
             }
@@ -226,6 +227,7 @@ function add(data) {
         //row.setAttribute('style', 'color: red;');
         cell.setAttribute('style', 'color: red;');
         cell.setAttribute('label', "(FIRST TIME)");
+        checkbox.setAttribute("checked", false);
     }
     row.appendChild(cell);
 

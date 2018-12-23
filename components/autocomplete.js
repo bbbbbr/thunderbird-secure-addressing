@@ -278,8 +278,8 @@ ProviderAutoCompleteSearch.prototype = {
             let len = 0;
             for(let e in emails) {len++};
             //log(len + " candidates for " + searchString + "\n");
-            acmax = SaGetPrefInt("autocomplete_max");
-            if ((len == 0) || (len > acmax)) {
+            let acmaxitem = SaGetPrefInt("autocomplete_max");
+            if ((len == 0) || (len > acmaxitem)) {
                 fail(len);
                 return;
             }
