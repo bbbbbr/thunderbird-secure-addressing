@@ -141,6 +141,7 @@ var prefs = {
     custom_autocompletion:    function() {return true;},
     confirmation_window:      function() {return true;},
     nowin_internal:           function() {return false;},
+    default_attached_check:   function() {return false;},
     default_checked:          function() {return "none";},
     infobtn_added:            function() {return false;},
     ab_search_target:         function() {return "PrimaryEmail,DisplayName,Department";},

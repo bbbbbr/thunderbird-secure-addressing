@@ -49,7 +49,7 @@ function updateRecipCount() {
             recip_count_checked++;
     }
 
-    // Updatae display label
+    // Update display label
     let stringsBundle = document.getElementById("secure-addressing-sb-caw");
 
     if (recip_count_total == 0) {
@@ -57,6 +57,31 @@ function updateRecipCount() {
     } else {
         recip_count_el.setAttribute("value", stringsBundle.getFormattedString('recip_count_String', [recip_count_checked, recip_count_total]));
     }
+}
+
+
+// Updates whether attachment checkbox is checked by default or not
+//
+// Only applies if : "default_attached_check" is enabled
+//
+// Called from startup()  after the recipient list has been built
+function updateAttachmentCheckbox() {
+
+    // If attachments follow the same auto-check box behavior as recipients,
+    // uncheck the attachment box if one or more recipients is unchecked by default
+
+    // Default is checked
+    let acheck = document.getElementById("acheck");
+    acheck.setAttribute("checked", true);
+
+    // Iterate through recipient checkboxes and see if any are *unchecked*
+    // If they are, then uncheck the attachment checkbox
+    let list = document.getElementById("addrlist");
+    let checkboxes = list.getElementsByTagName("checkbox");
+
+    for(let i = 0; i < checkboxes.length; i++)
+        if (checkboxes[i].getAttribute("checked") != "true")
+            acheck.setAttribute("checked", false);
 }
 
 
@@ -274,6 +299,12 @@ function startup() {
         openall.disabled = true;
     } else {
         acheck.label = stringsBundle.getFormattedString('attachmentString', [nattach]);
+
+        // If attachments follow the same auto-check box behavior as recipients,
+        // then update the checkbox to match the recipients created above
+        let defattachedcheck = SaGetPrefBool("default_attached_check");
+        if (defattachedcheck)
+            updateAttachmentCheckbox();
     }
 
     check_all_done();

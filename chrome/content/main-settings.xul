@@ -13,7 +13,7 @@
 
   <script type="application/x-javascript" src="chrome://global/content/nsUserSettings.js"/>
   <script type="application/x-javascript" src="chrome://secure-addressing/content/main-settings.js"/>
-  
+
   <tabbox>
     <tabs>
       <tab label="General"/>
@@ -43,22 +43,24 @@
           <caption label="Name and affiliation lookup"/>
           <label value="Select address books to look up"/>
           <hbox>
-            <button label="For internal address" 
+            <button label="For internal address"
                     oncommand="showSelection('ab_internal', 'For display (internal)');"/>
             <button label="For external address"
                     oncommand="showSelection('ab_external', 'For display (external)');"/>
             </hbox>
         </groupbox>
       </tabpanel>
-  
+
       <tabpanel id="confirmation" orient="vertical">
         <groupbox>
           <caption label="Confirmation window"/>
           <checkbox id="cbconfirm" label="Display confirmation window before sending e-mails"
                     oncommand="cbConfirmOnClick();"/>
           <groupbox>
-            <checkbox class="confirmwin" 
+            <checkbox class="confirmwin"
                       id="cbnowin" label="Do not display it for e-mails only to internal domains"/>
+            <checkbox class="confirmwin"
+                      id="cbdefattachcheck" label="Use same behavior for attachments"/>
             <label class="confirmwin" style="margin-top:5pt;" value="Default checkbox status"/>
             <radiogroup id="defchecked" style="margin-left: 10pt;">
                <radio class="confirmwin" label="Always unchecked" value="none"/>
@@ -110,7 +112,7 @@
           <checkbox id="cbstrip" label="Strip everything other than e-mail addresses in To and Cc fields"
                     oncommand="stripOnClick();" />
           <groupbox flex="1">
-            <checkbox disabled="true" id="cbcollect" 
+            <checkbox disabled="true" id="cbcollect"
                       oncommand="collectOnClick();" label="Allow this plugin to collect outgoing address" />
             <label id="lbcollect" value="(Otherwise, addresses will be stored without people's names)"/>
             <hbox>

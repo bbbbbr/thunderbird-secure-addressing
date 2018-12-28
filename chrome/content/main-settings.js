@@ -47,6 +47,11 @@ function startup(){
     let nowininternal = SaGetPrefBool("nowin_internal");
     document.getElementById("cbnowin").checked = nowininternal;
 
+    // Select whether attachments follow the same auto-check box behavior as recipients
+    let defattachedcheck = SaGetPrefBool("default_attached_check");
+    document.getElementById("cbdefattachcheck").checked = defattachedcheck;
+
+
     let defchecked_val = SaGetPref("default_checked");
     let defchecked = document.getElementById("defchecked");
     for(let i = 0; i < defchecked.itemCount; i++) {
@@ -70,7 +75,7 @@ function startup(){
 
     let abManager = Components.classes["@mozilla.org/abmanager;1"]
         .getService(Components.interfaces.nsIAbManager);
-    let allAddressBooks = abManager.directories; 
+    let allAddressBooks = abManager.directories;
     let collectList = document.getElementById("collectab");
     let idx = -1;
     let i = 0;
@@ -113,15 +118,15 @@ function cbConfirmOnClick() {
     let items = document.getElementsByClassName('confirmwin');
     for(let i = 0; i < items.length; i++) {
         items[i].disabled = disable;
-    } 
+    }
 }
 
 function csautoOnClick() {
     let disable = !document.getElementById("cbcsauto").checked;
-    let items = document.getElementsByClassName('csauto');    
+    let items = document.getElementsByClassName('csauto');
     for(let i = 0; i < items.length; i++) {
         items[i].disabled = disable;
-    } 
+    }
 }
 
 
@@ -173,7 +178,7 @@ function selectList(item){
 function showSelection(abtype, caption) {
     var params = {type: abtype, title: caption};
     window.openDialog("chrome://secure-addressing/content/address-book-selection.xul",
-                      "Addressbook Selection", 
+                      "Addressbook Selection",
                       "resizable,chrome,modal,titlebar,centerscreen",
                       params);
 }
@@ -194,8 +199,12 @@ function doOK(){
     let nowininternal = document.getElementById("cbnowin").checked;
     SaSetPrefBool("nowin_internal", nowininternal);
     let defchecked = document.getElementById("defchecked").selectedItem.value;
-    dbg("selected = " + defchecked);   
+    dbg("selected = " + defchecked);
     SaSetPref("default_checked", defchecked);
+
+    // Select whether attachments follow the same auto-check box behavior as recipients
+    let defattachedcheck = document.getElementById("cbdefattachcheck").checked;
+    SaSetPrefBool("default_attached_check", defattachedcheck);
 
     let csauto_on = document.getElementById("cbcsauto").checked;
     SaSetPrefBool("custom_autocompletion", csauto_on);
