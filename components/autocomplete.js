@@ -125,7 +125,7 @@ ProviderAutoCompleteResult.prototype = {
   /**
    * Get the final value that should be completed when the user confirms
    * the match at the given index.
-   * @return {string} the final value of the result at the given index 
+   * @return {string} the final value of the result at the given index
    **/
    getFinalCompleteValueAt: function(index) {
      return this.getValueAt(index);
@@ -205,14 +205,15 @@ ProviderAutoCompleteSearch.prototype = {
         if (searchString.match(/^\* */)) {
             ss = searchString.replace(/^\* */, "");
             external = true;
-        }            
+        }
         if (searchString.match(/^\+ */)) {
             ss = searchString.replace(/^\+ */, "");
             extended = true;
-        }            
-        //log("string = " + ss + ", external = " + external + 
+        }
+        //log("string = " + ss + ", external = " + external +
         //    ", extended = " + extended + "\n");
-        if (ss.length < 5) {
+        let acminchars = SaGetPrefInt("autocomplete_minchars");
+        if (ss.length < acminchars) {
             return;
         }
 
@@ -338,4 +339,4 @@ ProviderAutoCompleteSearch.prototype = {
 // The following line is what XPCOM uses to create components
 const NSGetFactory =
   XPCOMUtils.generateNSGetFactory([ ProviderAutoCompleteSearch ]);
-  
+

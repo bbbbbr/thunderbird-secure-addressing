@@ -91,6 +91,11 @@
             <textbox class="csauto" id="acmax" value="1" maxwidth="25" style="text-align: right;" />
             <label class="csauto" value="person(s) found" style="padding-top:5px;"/>
           </hbox>
+          <hbox>
+            <label class="csauto" value="- Characters required to autocomplete (2 - 9)"
+                   style="padding-top:5px;"/>
+            <textbox class="csauto" id="acminchars" value="1" maxwidth="25" style="text-align: right;" />
+          </hbox>
           <label class="csauto" value="- Address book fields to look at"/>
           <groupbox style="margin-left: 10px;">
             <hbox>

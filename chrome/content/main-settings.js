@@ -102,6 +102,9 @@ function startup(){
     let acmax = SaGetPrefInt("autocomplete_max");
     document.getElementById("acmax").value = acmax;
 
+    let acminchars = SaGetPrefInt("autocomplete_minchars");
+    document.getElementById("acminchars").value = acminchars;
+
     let abfields = SaGetPrefAry("ab_search_target");
     let items = document.getElementsByClassName('abfield');
     for(i = 0; i < items.length; i++) {
@@ -222,6 +225,13 @@ function doOK(){
         acmax = 0;
     }
     SaSetPrefInt("autocomplete_max", acmax);
+
+    let acminchars = Number(document.getElementById("acminchars").value);
+    if (acminchars < 2)
+        acminchars = 2;
+    if (acminchars > 9)
+        acminchars = 9;
+    SaSetPrefInt("autocomplete_minchars", acminchars);
 
     let abfields = [];
     let items = document.getElementsByClassName('abfield');

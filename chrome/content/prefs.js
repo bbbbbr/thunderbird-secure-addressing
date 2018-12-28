@@ -128,6 +128,7 @@ var prefs = {
                                   return customPrefs.copyUnicharPref("mail.collect_addressbook");
                               },
     autocomplete_max:         function() {return 1;},
+    autocomplete_minchars:    function() {return 5;},
     name_format_dc:           function() {return "@N [@D, @C]";},
     name_format_d:            function() {return "@N [@D]";},
     name_format_c:            function() {return "@N [@C]";},
